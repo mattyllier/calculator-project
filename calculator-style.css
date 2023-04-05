@@ -1,0 +1,57 @@
+:root {
+    --boxShadow: ;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: darkblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#calculator {
+    height: 80%;
+    width: 50%;
+    background-color: midnightblue;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#header{
+    height:k;
+}
+
+#display {
+    height: auto;
+    width: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: lightcyan;
+    font-family: tahoma;
+    font-size: 56px;
+    border: solid 5px mediumslateblue;
+    border-radius: 100%;
+}
+
+.button {
+    height: 100px;
+    width: 100px;
+    background-color: mediumslateblue;
+    border-radius: 100%;
+    box-shadow: var(--boxShadow);
+    cursor: pointer;
+}
+
+#bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
