@@ -17,6 +17,10 @@ const sixButton = document.getElementById('6')
 const sevenButton = document.getElementById('7')
 const eightButton = document.getElementById('8')
 const nineButton = document.getElementById('9')
+const decimalButton = document.getElementById('dec')
+const percentButton = document.getElementById('%')
+const expButton = document.getElementById('^')
+const subZeroButton = document.getElementById('subZero')
 
 const equalButton = document.getElementById('=')
 const clearButton = document.getElementById('clear')
@@ -177,7 +181,33 @@ nineButton.addEventListener('click',(e)=>{
     operatorClicked = false
     console.log(equation)
 })
+decimalButton.addEventListener('click',(e)=>{
+    equation += decimalButton.value
+    display.innerText += decimalButton.value
+    operatorClicked = false
+    console.log(equation)
+})
+percentButton.addEventListener('click',(e)=>{
+    //to decimal function
+    equation += percentButton.value
+    display.innerText += percentButton.value
+    operatorClicked = false
+    console.log(equation)
+})
+expButton.addEventListener('click',(e)=>{
+    //to exp function
+    equation += ` ${expButton.value} `
+    display.innerText += expButton.value
+    operatorClicked = false
+    console.log(equation)
+})
+subZeroButton.addEventListener('click',(e)=>{
+     operatorClicked = false
+     equation += subZeroButton.value
+     display.innerText += subZeroButton.value
+     console.log(equation)
 
+})
 
     //currentEquation 
     const currentEq = (str)=>{
@@ -190,47 +220,55 @@ nineButton.addEventListener('click',(e)=>{
             switch(true){
                 case eqArr[i]==='+':
                     display.innerText = eqArr[i-1]+eqArr[i+1]
-                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]+eqArr[i+1])
-                    break;
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]+eqArr[i+1])
+                    console.log(eqArr)
+                    continue;
                 case eqArr[i]==='-':
                     display.innerText = eqArr[i-1]-eqArr[i+1]
-                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]-eqArr[i+1])
-                    break;
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]-eqArr[i+1])
+                    console.log(eqArr)
+                    continue;
                 case eqArr[i]==='*':
                     display.innerText = eqArr[i-1]*eqArr[i+1]
-                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]*eqArr[i+1])
-                    break;
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]*eqArr[i+1])
+                    continue;
                 case eqArr[i]==='/':
                     display.innerText = eqArr[i-1]/eqArr[i+1]
-                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]/eqArr[i+1])
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]/eqArr[i+1])
+                case eqArr[i]==='^':
+                    display.innerText = eqArr[i-1]^eqArr[i+1]
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]^eqArr[i+1])
             }
-            console.log(eqArr)
-
+            
             // if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
-            //     str[i].concat
-            //     eqArr.push(str[i])
-            //     eqArr.reduce((a,b)=>{
-            //         typeof a==='number'&& typeof b==='number' ? parseInt(a.concat(b)) : parseInt(a)
+                //     str[i].concat
+                //     eqArr.push(str[i])
+                //     eqArr.reduce((a,b)=>{
+                    //         typeof a==='number'&& typeof b==='number' ? parseInt(a.concat(b)) : parseInt(a)
             //     })
             // }
             // console.log(eqArr)
-        //     switch(true){
-        //        case str[i]==='+':
-        //            str[i-1]+str[i+1]
-        //        case str[i]==='-':
-        //            str
-        // case currentOperator==='*':
-        //     valA *= valB
-        //     return valA
-        // case currentOperator==='/':
-        //     valA /= valB
-        //     return valA
-        // default:
-        //     return valA
-        // }
-        // }
-     }
-    }
+            //     switch(true){
+                //        case str[i]==='+':
+                //            str[i-1]+str[i+1]
+                //        case str[i]==='-':
+                //            str
+                // case currentOperator==='*':
+                //     valA *= valB
+                //     return valA
+                // case currentOperator==='/':
+                //     valA /= valB
+                //     return valA
+                // default:
+                //     return valA
+                // }
+                // }
+            }
+            console.log(eqArr)
+            equation = eqArr
+            return equation
+        }
+
 equalButton.addEventListener('click',(e)=>{
     currentEq(equation)
     clicked = true

@@ -47,6 +47,16 @@ body {
     border-radius: 100%;
     box-shadow: var(--boxShadow);
     cursor: pointer;
+    font-family: system-ui, -apple-system;
+    font-size: 400%;
+    color: darkslategrey;
+    text-shadow: 2px 0 10px maroon, 2px 2px black;
+}
+#numbers {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .operator {
@@ -54,9 +64,29 @@ body {
     width: 100px;
     background-color: mediumslateblue;
     border-radius: 100%;
+    border: solid 20px blueviolet;
     box-shadow: var(--boxShadow);
     cursor: pointer;
+    font-family: system-ui, -apple-system;
+    font-size: 400%;
+    color: darkslategrey;
+    text-shadow: 2px 0 10px maroon, 2px 2px black;
 }
+
+.bottom {
+    height: 100px;
+    width: 200px;
+    background-color: lightslategray;
+    border-radius: 50px;
+    border: solid 20px darkslategrey;
+    box-shadow: var(--boxShadow);
+    cursor: pointer;
+    font-family: system-ui, -apple-system;
+    font-size: 400%;
+    color: darkslategrey;
+    text-shadow: 2px 0 10px maroon, 2px 2px black;
+}
+
 
 
 #bottom {
