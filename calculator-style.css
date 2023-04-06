@@ -49,6 +49,16 @@ body {
     cursor: pointer;
 }
 
+.operator {
+    height: 100px;
+    width: 100px;
+    background-color: mediumslateblue;
+    border-radius: 100%;
+    box-shadow: var(--boxShadow);
+    cursor: pointer;
+}
+
+
 #bottom {
     display: flex;
     flex-direction: row;

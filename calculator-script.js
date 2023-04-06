@@ -22,24 +22,24 @@ const equalButton = document.getElementById('=')
 const clearButton = document.getElementById('clear')
 
 //set value attributes to each variable
-addButton.value = '+'
-subButton.value = '-'
-multButton.value = '*'
-divButton.value = '/'
+// addButton.value = '+'
+// subButton.value = '-'
+// multButton.value = '*'
+// divButton.value = '/'
     
-zeroButton.value = '0'
-oneButton.value = 1
-twoButton.value = 2
-threeButton.value = '3'
-fourButton.value = '4'
-fiveButton.value = '5'
-sixButton.value = '6'
-sevenButton.value = '7'
-eightButton.value = '8'
-nineButton.value = '9'
+// zeroButton.value = '0'
+// oneButton.value = 1
+// twoButton.value = 2
+// threeButton.value = '3'
+// fourButton.value = '4'
+// fiveButton.value = '5'
+// sixButton.value = '6'
+// sevenButton.value = '7'
+// eightButton.value = '8'
+// nineButton.value = '9'
     
-equalButton.value = '='
-clearButton.value = ''
+// equalButton.value = '='
+// clearButton.value = ''
 
 //set equation to an empty string at default
 // let equation = ''
@@ -73,11 +73,18 @@ display.innerText = equation
 operatorClicked = false
 })
 
-
+// button.addEventListener('click',(e)=>{
+//     equation += e.target.value
+//     display.innerText = e.target.value
+// })
+// operator.addEventListener('click',(e)=>{
+//     equation += e.target.value
+//     display.innerText = e.target.value
+// })
 
 addButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
-        equation += addButton.value
+        equation += ` ${addButton.value} `
         display.innerText += addButton.value
         operatorClicked = true
         console.log(equation)
@@ -85,7 +92,7 @@ addButton.addEventListener('click',(e)=>{
 })
 subButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
-        equation += subButton.value
+        equation += ` ${subButton.value} `
         display.innerText += subButton.value
     operatorClicked = true
     console.log(equation)
@@ -93,7 +100,7 @@ subButton.addEventListener('click',(e)=>{
 })
 multButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
-        equation += multButton.value
+        equation += ` ${multButton.value} `
         display.innerText += multButton.value
         operatorClicked = true
         console.log(equation)
@@ -101,7 +108,7 @@ multButton.addEventListener('click',(e)=>{
 })
 divButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
-        equation += divButton.value
+        equation += ` ${divButton.value} `
         display.innerText += divButton.value
         operatorClicked = true
         console.log(equation)
@@ -174,22 +181,39 @@ nineButton.addEventListener('click',(e)=>{
 
     //currentEquation 
     const currentEq = (str)=>{
-        const strArr = str.split('')
-        
-        const eqArr = str.split('+'||'-'||'*'||'/')
+        const eqArr = str.split(' ')
         console.log(eqArr)
         for(let i = 0; i < str.length; i++){
-            parseInt(eqArr[i])
-            console.log(eqArr)
-
-            if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
-                str[i].concat
-                eqArr.push(str[i])
-                eqArr.reduce((a,b)=>{
-                    typeof a==='number'&& typeof b==='number' ? parseInt(a.concat(b)) : parseInt(a)
-                })
+            // if(eqArr[i]!=='+'||eqArr[i]!=='-'||eqArr[i]!=='*'||eqArr[i]!=='/'){
+            //     parseInt(eqArr[i])
+            // }
+            switch(true){
+                case eqArr[i]==='+':
+                    display.innerText = eqArr[i-1]+eqArr[i+1]
+                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]+eqArr[i+1])
+                    break;
+                case eqArr[i]==='-':
+                    display.innerText = eqArr[i-1]-eqArr[i+1]
+                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]-eqArr[i+1])
+                    break;
+                case eqArr[i]==='*':
+                    display.innerText = eqArr[i-1]*eqArr[i+1]
+                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]*eqArr[i+1])
+                    break;
+                case eqArr[i]==='/':
+                    display.innerText = eqArr[i-1]/eqArr[i+1]
+                    eqArr.splice(eqArr[i-1],3,eqArr[i-1]/eqArr[i+1])
             }
             console.log(eqArr)
+
+            // if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
+            //     str[i].concat
+            //     eqArr.push(str[i])
+            //     eqArr.reduce((a,b)=>{
+            //         typeof a==='number'&& typeof b==='number' ? parseInt(a.concat(b)) : parseInt(a)
+            //     })
+            // }
+            // console.log(eqArr)
         //     switch(true){
         //        case str[i]==='+':
         //            str[i-1]+str[i+1]
