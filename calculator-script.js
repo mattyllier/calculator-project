@@ -206,7 +206,6 @@ subZeroButton.addEventListener('click',(e)=>{
      equation += subZeroButton.value
      display.innerText += subZeroButton.value
      console.log(equation)
-
 })
 
     //currentEquation 
@@ -219,8 +218,8 @@ subZeroButton.addEventListener('click',(e)=>{
             // }
             switch(true){
                 case eqArr[i]==='+':
-                    display.innerText = eqArr[i-1]+eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]+eqArr[i+1])
+                    display.innerText = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
+                    eqArr.splice(eqArr[i],3,parseInt(eqArr[i-1])+parseInt(eqArr[i+1]))
                     console.log(eqArr)
                     continue;
                 case eqArr[i]==='-':
@@ -235,11 +234,13 @@ subZeroButton.addEventListener('click',(e)=>{
                 case eqArr[i]==='/':
                     display.innerText = eqArr[i-1]/eqArr[i+1]
                     eqArr.splice(eqArr[i],3,eqArr[i-1]/eqArr[i+1])
+                    continue;
                 case eqArr[i]==='^':
-                    display.innerText = eqArr[i-1]^eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]^eqArr[i+1])
+                    display.innerText = eqArr[i-1]**eqArr[i+1]
+                    eqArr.splice(eqArr[i],3,eqArr[i-1]**eqArr[i+1])
+                    continue;
             }
-            
+        
             // if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
                 //     str[i].concat
                 //     eqArr.push(str[i])
@@ -271,7 +272,8 @@ subZeroButton.addEventListener('click',(e)=>{
 
 equalButton.addEventListener('click',(e)=>{
     currentEq(equation)
-    clicked = true
+    display.innerText = equation
+    operatorClicked = false
 })
 
 
