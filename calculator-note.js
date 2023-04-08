@@ -64,38 +64,104 @@
 // const myStr = '5+5*3/2'
 // console.log(solveEq(myStr))
 
-let valA = 5
-let currentOperator = '/'
-let valB = 2
-let operatorClicked = false
-let equation = `${valA}${currentOperator}${valB}`
+// let valA = 5
+// let currentOperator = '/'
+// let valB = 2
+// let operatorClicked = false
+// let equation = `${valA}${currentOperator}${valB}`
 
-oneButton.addEventListener('click',(e)=>{
-    operatorClicked === false ? valA += oneButton.value : valB += oneButton.value
-})
+// oneButton.addEventListener('click',(e)=>{
+//     operatorClicked === false ? valA += oneButton.value : valB += oneButton.value
+// })
 
-addButton.addEventListener('click',(e)=>{
-    currentOperator = addButton.value
-    operatorClicked = true
-})
+// addButton.addEventListener('click',(e)=>{
+//     currentOperator = addButton.value
+//     operatorClicked = true
+// })
 
 
-const currentEq = ()=>{
-    switch(true){
-        case currentOperator==='+':
-            valA += valB
-            return valA
-        case currentOperator==='-':
-            valA -= valB
-            return valA
-        case currentOperator==='*':
-            valA *= valB
-            return valA
-        case currentOperator==='/':
-            valA /= valB
-            return valA
-        default:
-            return valA
+// const currentEq = ()=>{
+//     switch(true){
+//         case currentOperator==='+':
+//             valA += valB
+//             return valA
+//         case currentOperator==='-':
+//             valA -= valB
+//             return valA
+//         case currentOperator==='*':
+//             valA *= valB
+//             return valA
+//         case currentOperator==='/':
+//             valA /= valB
+//             return valA
+//         default:
+//             return valA
+// }
+// }
+// console.log(currentEq())
+
+
+// const currentEq = (str)=>{
+//     const eqArr = str.split(' ')
+//     console.log(eqArr)
+//     eqArr.reduce((a,b,c)=>{
+//         let solved = ''
+//         console.log(eqArr.length)
+//         switch(true){
+//             case b==='+':
+//                 solved = parseInt(a)+parseInt(c)
+//                 display.innerText = solved
+//                 eqArr.splice([b],3,solved)
+//                 console.log(eqArr)
+//             //    continue;
+//                 case b==='-':
+//                     solved = a-c
+//                     display.innerText = solved
+//                     eqArr.splice([b],3,solved)
+//                     console.log(eqArr)
+//                 //    continue;
+//                     case b==='*':
+//                         solved = a*c
+//                         display.innerText = solved
+//                 eqArr.splice([b],3,solved)
+//             //    continue;
+//                 case b==='/':
+//                     solved = a/c
+//                     display.innerText = solved
+//                     eqArr.splice([b],3,solved)
+//                //     continue;
+//                     case eqArr[i]==='^':
+//                         solved = eqArr[i-1]**eqArr[i+1]
+//                         display.innerText = solved
+//                         eqArr.splice(eqArr[i],3,solved)
+//                   //      continue;
+//                         case eqArr[i]==='%':
+//                             solved = eqArr[i-1]/100
+//                             display.innerText = solved
+//                             eqArr.splice(eqArr[i],3,solved)
+//                        //     continue;
+//                         }
+//                     })
+    
+//     console.log(eqArr)
+//     equation = eqArr.join('')
+//     return eqArr
+// }
+// let equation = '4+5/4'
+// currentEq(equation)
+
+
+let newEquation = '6+6*5'
+const evalu = newEquation.match(/\d+\.\d+|\d+|[^0-9]/g)
+console.log(evalu)
+const solved = ''
+for(let i = 0; i < evalu.length; i++){
+    if(i===0){
+        solved = parseInt(evalu[i])
+    } else {
+        if(!NaN(evalu)){
+            
+        }
+    }
 }
-}
-console.log(currentEq())
+

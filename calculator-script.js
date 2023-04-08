@@ -19,6 +19,7 @@ const eightButton = document.getElementById('8')
 const nineButton = document.getElementById('9')
 const decimalButton = document.getElementById('dec')
 const percentButton = document.getElementById('%')
+const sqrtButton = document.getElementById('sqrt')
 const expButton = document.getElementById('^')
 const subZeroButton = document.getElementById('subZero')
 
@@ -119,6 +120,7 @@ divButton.addEventListener('click',(e)=>{
     }
 })
 
+
 //add event listeners for number buttons
 zeroButton.addEventListener('click',(e)=>{
     equation += zeroButton.value
@@ -189,8 +191,14 @@ decimalButton.addEventListener('click',(e)=>{
 })
 percentButton.addEventListener('click',(e)=>{
     //to decimal function
-    equation += percentButton.value
+    equation += ` ${percentButton.value} `
     display.innerText += percentButton.value
+    operatorClicked = false
+    console.log(equation)
+})
+sqrtButton.addEventListener('click',(e)=>{
+    equation += ` ${sqrtButton.value} `
+    display.innerText += sqrtButton.value
     operatorClicked = false
     console.log(equation)
 })
@@ -208,39 +216,113 @@ subZeroButton.addEventListener('click',(e)=>{
      console.log(equation)
 })
 
+const operationOrder = (str) =>{
+    const eqArr  = str.split(' ')
+    for(let i = 0; i < eqArr.length; i++){
+        if(eqArr.length > 3){
+            switch(true){
+                case (eqArr[1]==='+'||eqArr[1]==='-')&&(eqArr[3]==='*'||eqArr[3]==='/'):
+                    eqArr.reverse()
+                    
+            }
+        }
+    }
+
+}
     //currentEquation 
     const currentEq = (str)=>{
-        const eqArr = str.split(' ')
-        console.log(eqArr)
-        for(let i = 0; i < str.length; i++){
-            // if(eqArr[i]!=='+'||eqArr[i]!=='-'||eqArr[i]!=='*'||eqArr[i]!=='/'){
-            //     parseInt(eqArr[i])
-            // }
+        operationOrder(equation)
+        const eqArr  = str.split(' ')
+        // for(let i = 0; i < eqArr.length; i++){
+        //     if(((eqArr.includes('*')||eqArr.includes('/'))&&(eqArr.includes('+')||eqArr.includes('-')))&&((['*']||['/'])<(['+']||['-']))){
+        //         eqArr.reverse()
+        //     }
+        // }
+        for(let i = 0; i < eqArr.length; i++){
+            let solved = ''
+       //     console.log(eqArr.length)
             switch(true){
                 case eqArr[i]==='+':
-                    display.innerText = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
-                    eqArr.splice(eqArr[i],3,parseInt(eqArr[i-1])+parseInt(eqArr[i+1]))
+                    solved = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
                     console.log(eqArr)
                     continue;
                 case eqArr[i]==='-':
-                    display.innerText = eqArr[i-1]-eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]-eqArr[i+1])
+                    solved = eqArr[i-1]-eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
                     console.log(eqArr)
                     continue;
                 case eqArr[i]==='*':
-                    display.innerText = eqArr[i-1]*eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]*eqArr[i+1])
+                    solved = eqArr[i-1]*eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
                     continue;
                 case eqArr[i]==='/':
-                    display.innerText = eqArr[i-1]/eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]/eqArr[i+1])
+                    solved = eqArr[i-1]/eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    continue;
+                    case eqArr[i]==='^':
+                    solved = eqArr[i-1]**eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    continue;
+                case eqArr[i]==='%':
+                    solved = eqArr[i-1]/100
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    continue;
+                case eqArr[i]==='√':
+                    solved = Math.sqrt(eqArr[i+1])
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+            }
+      }
+            //second iteration
+       for(let i = 0; i < eqArr.length; i++){
+            let solved = ''
+            switch(true){
+                case eqArr[i]==='+':
+                    solved = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    console.log(eqArr)
+                    continue;
+                case eqArr[i]==='-':
+                    solved = eqArr[i-1]-eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    console.log(eqArr)
+                    continue;
+                case eqArr[i]==='*':
+                    solved = eqArr[i-1]*eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    continue;
+                case eqArr[i]==='/':
+                    solved = eqArr[i-1]/eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
                     continue;
                 case eqArr[i]==='^':
-                    display.innerText = eqArr[i-1]**eqArr[i+1]
-                    eqArr.splice(eqArr[i],3,eqArr[i-1]**eqArr[i+1])
+                    solved = eqArr[i-1]**eqArr[i+1]
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
+                    continue;
+                case eqArr[i]==='%':
+                    solved = eqArr[i-1]/100
+                    display.innerText = solved
+                    eqArr.splice(eqArr[i],3,solved)
                     continue;
             }
-        
+
+
+            // equation = eqArr.join('')
+            // if(equation.length > 1){
+            //     currentEq()
+            // }
             // if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
                 //     str[i].concat
                 //     eqArr.push(str[i])
@@ -266,8 +348,8 @@ subZeroButton.addEventListener('click',(e)=>{
                 // }
             }
             console.log(eqArr)
-            equation = eqArr
-            return equation
+            equation = eqArr.join('')
+            return eqArr
         }
 
 equalButton.addEventListener('click',(e)=>{
