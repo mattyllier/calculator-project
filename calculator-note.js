@@ -151,17 +151,46 @@
 // currentEq(equation)
 
 
-let newEquation = '6+6*5'
-const evalu = newEquation.match(/\d+\.\d+|\d+|[^0-9]/g)
-console.log(evalu)
-const solved = ''
-for(let i = 0; i < evalu.length; i++){
-    if(i===0){
-        solved = parseInt(evalu[i])
-    } else {
-        if(!NaN(evalu)){
-            
+// let newEquation = '6+6*5'
+// const evalu = newEquation.match(/\d+\.\d+|\d+|[^0-9]/g)
+// console.log(evalu)
+// const solved = ''
+// for(let i = 0; i < evalu.length; i++){
+//     if(i===0){
+//         solved = parseInt(evalu[i])
+//     } else {
+//         if(!NaN(evalu)){
+
+//         }
+//     }
+// }
+let equation = '5+4*7'
+//let solveTemplate = `${int}`
+//let int = (/^-?\d*(\.\d+)?$/gm)
+//let operator = (/\+\-\*\//)
+//const eqArr = equation.split(' ')
+//eqArr.reduce((int,operator)=>{})
+
+const currentEq = (equation)=>{
+    let add = (/(\d+(?:\.\d+)?) ?\+ ?(\d+(?:\.\d+)?)/g)
+    let sub = (/(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/g)
+    let mult = (/(\d+(?:\.\d+)?) ?\* ?(\d+(?:\.\d+)?)/g)
+    let div = (/(\d+(?:\.\d+)?) ?\/ ?(\d+(?:\.\d+)?)/g)
+    if(isNaN(equation)){
+    switch(true){
+        case (add.test(equation)):
+            return equation.replace(add,(a,b)=>a+b)
+        case (sub.test(equation)):
+            return equation.replace(sub,(a,b)=>a-b)
+        case (mult.test(equation)):
+            return equation.replace(mult,(a,b)=>a*b)
+        case (mult.test(equation)):
+            return equation.replace(div,(a,b)=>a/b)
+        default:
+            return equation
         }
     }
+        console.log(equation)
+    return equation
 }
-
+console.log(currentEq())

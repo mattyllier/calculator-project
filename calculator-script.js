@@ -231,7 +231,8 @@ const operationOrder = (str) =>{
 }
     //currentEquation 
     const currentEq = (str)=>{
-        operationOrder(equation)
+      //  operationOrder(equation)
+      
         const eqArr  = str.split(' ')
         // for(let i = 0; i < eqArr.length; i++){
         //     if(((eqArr.includes('*')||eqArr.includes('/'))&&(eqArr.includes('+')||eqArr.includes('-')))&&((['*']||['/'])<(['+']||['-']))){
