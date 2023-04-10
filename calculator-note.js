@@ -164,33 +164,106 @@
 //         }
 //     }
 // }
-let equation = '5+4*7'
+//let equation = '5+4*7'
 //let solveTemplate = `${int}`
 //let int = (/^-?\d*(\.\d+)?$/gm)
 //let operator = (/\+\-\*\//)
 //const eqArr = equation.split(' ')
 //eqArr.reduce((int,operator)=>{})
 
-const currentEq = (equation)=>{
-    let add = (/(\d+(?:\.\d+)?) ?\+ ?(\d+(?:\.\d+)?)/g)
-    let sub = (/(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/g)
-    let mult = (/(\d+(?:\.\d+)?) ?\* ?(\d+(?:\.\d+)?)/g)
-    let div = (/(\d+(?:\.\d+)?) ?\/ ?(\d+(?:\.\d+)?)/g)
-    if(isNaN(equation)){
-    switch(true){
-        case (add.test(equation)):
-            return equation.replace(add,(a,b)=>a+b)
-        case (sub.test(equation)):
-            return equation.replace(sub,(a,b)=>a-b)
-        case (mult.test(equation)):
-            return equation.replace(mult,(a,b)=>a*b)
-        case (mult.test(equation)):
-            return equation.replace(div,(a,b)=>a/b)
-        default:
-            return equation
-        }
-    }
-        console.log(equation)
-    return equation
-}
-console.log(currentEq())
+// const currentEq = (equation)=>{
+//     let add = (/(\d+(?:\.\d+)?) ?\+ ?(\d+(?:\.\d+)?)/g)
+//     let sub = (/(\d+(?:\.\d+)?) ?\- ?(\d+(?:\.\d+)?)/g)
+//     let mult = (/(\d+(?:\.\d+)?) ?\* ?(\d+(?:\.\d+)?)/g)
+//     let div = (/(\d+(?:\.\d+)?) ?\/ ?(\d+(?:\.\d+)?)/g)
+//     if(isNaN(equation)){
+//     switch(true){
+//         case (add.test(equation)):
+//             return equation.replace(add,(a,b)=>a+b)
+//         case (sub.test(equation)):
+//             return equation.replace(sub,(a,b)=>a-b)
+//         case (mult.test(equation)):
+//             return equation.replace(mult,(a,b)=>a*b)
+//         case (mult.test(equation)):
+//             return equation.replace(div,(a,b)=>a/b)
+//         default:
+//             return equation
+//         }
+//     }
+//         console.log(equation)
+//     return equation
+// }
+// console.log(currentEq())
+
+
+// const solveEq = (str) => {
+//     for(let char in str){
+//         if(str.includes('^')){
+//             str.replace(['^'-1],'')
+//             str.replace('^','')
+//             str.replace(['^'+1],['^'-1]**['^'+1])
+//         }
+//     }
+//     return str
+// }
+// let myStr = '5+4^3'
+// console.log(solveEq(myStr))
+
+// const solveEq = (str)=>{
+//     let eqArr = str.split(' ')
+//     eqArr.includes('^') ? eqArr.splice(['^'-1],3,)
+    
+// }
+
+
+const currentEq = (str)=>{
+    const eqArr  = str.split(' ')
+            for(let i = 0; i < eqArr.length; i++){
+                let solved = ''
+                switch(true){
+                    case eqArr[i]==='^':
+                        solved = parseInt(eqArr[i-1])**parseInt(eqArr[i+1])
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        console.log(eqArr)
+                        continue;
+                    case eqArr[i]==='*':
+                        solved = eqArr[i-1]*eqArr[i+1]
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        console.log(eqArr)
+                        continue;
+                    case eqArr[i]==='*':
+                        solved = eqArr[i-1]*eqArr[i+1]
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        continue;
+                    case eqArr[i]==='/':
+                        solved = eqArr[i-1]/eqArr[i+1]
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        continue;
+                    case eqArr[i]==='^':
+                        solved = eqArr[i-1]**eqArr[i+1]
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        continue;
+                    case eqArr[i]==='%':
+                        solved = eqArr[i-1]/100
+                        display.innerText = solved
+                        eqArr.splice(eqArr[i],3,solved)
+                        continue;
+                        case eqArr[i]==='√':
+                            solved = Math.sqrt(eqArr[i+1])
+                            display.innerText = solved
+                            eqArr.splice(eqArr[i],3,solved)
+                            continue;
+                        }
+                        
+                    }
+                    equation = eqArr.join('')
+                    return equation
+                }
+   
+                let equation = '5+6^2'
+console.log(currentEq(equation))

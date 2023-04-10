@@ -216,195 +216,24 @@ subZeroButton.addEventListener('click',(e)=>{
      console.log(equation)
 })
 
-const operationOrder = (str) =>{
-    const eqArr  = str.split(' ')
+const solveExp = ()=>{
+    let eqArr = equation.split(' ')
+    console.log(eqArr)
     for(let i = 0; i < eqArr.length; i++){
-        if(eqArr.length > 3){
-            switch(true){
-                case (eqArr[1]==='+'||eqArr[1]==='-')&&(eqArr[3]==='*'||eqArr[3]==='/'):
-                    eqArr.reverse()
-                    
-            }
+        if(eqArr[i]==='^'){
+            let solved = eqArr[i-1]**eqArr[i+1]
+            display.innerText = solved
+            eqArr.splice([i-1],3,solved)
+            console.log(eqArr)
         }
     }
-
+    equation = eqArr.join('')
+    return equation
 }
-    //currentEquation 
-    const currentEq = (str)=>{
-      //  operationOrder(equation)
-      
-        const eqArr  = str.split(' ')
-        // for(let i = 0; i < eqArr.length; i++){
-        //     if(((eqArr.includes('*')||eqArr.includes('/'))&&(eqArr.includes('+')||eqArr.includes('-')))&&((['*']||['/'])<(['+']||['-']))){
-        //         eqArr.reverse()
-        //     }
-        // }
-        for(let i = 0; i < eqArr.length; i++){
-            let solved = ''
-       //     console.log(eqArr.length)
-            switch(true){
-                case eqArr[i]==='+':
-                    solved = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    console.log(eqArr)
-                    continue;
-                case eqArr[i]==='-':
-                    solved = eqArr[i-1]-eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    console.log(eqArr)
-                    continue;
-                case eqArr[i]==='*':
-                    solved = eqArr[i-1]*eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='/':
-                    solved = eqArr[i-1]/eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                    case eqArr[i]==='^':
-                    solved = eqArr[i-1]**eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='%':
-                    solved = eqArr[i-1]/100
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='√':
-                    solved = Math.sqrt(eqArr[i+1])
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-            }
-      }
-            //second iteration
-       for(let i = 0; i < eqArr.length; i++){
-            let solved = ''
-            switch(true){
-                case eqArr[i]==='+':
-                    solved = parseInt(eqArr[i-1])+parseInt(eqArr[i+1])
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    console.log(eqArr)
-                    continue;
-                case eqArr[i]==='-':
-                    solved = eqArr[i-1]-eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    console.log(eqArr)
-                    continue;
-                case eqArr[i]==='*':
-                    solved = eqArr[i-1]*eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='/':
-                    solved = eqArr[i-1]/eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='^':
-                    solved = eqArr[i-1]**eqArr[i+1]
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-                case eqArr[i]==='%':
-                    solved = eqArr[i-1]/100
-                    display.innerText = solved
-                    eqArr.splice(eqArr[i],3,solved)
-                    continue;
-            }
-
-
-            // equation = eqArr.join('')
-            // if(equation.length > 1){
-            //     currentEq()
-            // }
-            // if(typeof parseInt(str[i])==='number' && parseInt(str[i+1]==='number')){
-                //     str[i].concat
-                //     eqArr.push(str[i])
-                //     eqArr.reduce((a,b)=>{
-                    //         typeof a==='number'&& typeof b==='number' ? parseInt(a.concat(b)) : parseInt(a)
-            //     })
-            // }
-            // console.log(eqArr)
-            //     switch(true){
-                //        case str[i]==='+':
-                //            str[i-1]+str[i+1]
-                //        case str[i]==='-':
-                //            str
-                // case currentOperator==='*':
-                //     valA *= valB
-                //     return valA
-                // case currentOperator==='/':
-                //     valA /= valB
-                //     return valA
-                // default:
-                //     return valA
-                // }
-                // }
-            }
-            console.log(eqArr)
-            equation = eqArr.join('')
-            return eqArr
-        }
 
 equalButton.addEventListener('click',(e)=>{
-    currentEq(equation)
+    solveExp()
     display.innerText = equation
     operatorClicked = false
 })
 
-
-//equals button outputs the value of the equation
-// const solveEq = (str) => {
-//     let arr = str.split('')
-//     arr.reduce((a,b)=>{
-//         switch(true){
-//             case a*0==0 && b*0==0:
-//                 parseInt(`${a}${b}`)
-//             case a*0==0 && b*0!=0:
-//                 parseInt(a)
-//             case a*0!=0 && b*0==0:
-//                 parseInt(b)
-//         }
-//     })
-//     let value = arr.toString()
-//     return value
-// }
-
-    //set return value and display to screen
-
-
-    // const addition = (num1,num2)=>{
-        //     return num1+num2
-        // }
-    // oneButton.addEventListener('click',(e)=>{
-        //     addButton.addEventListener('click',(e)=>{
-            //         equation += 1
-            //         display.innerText = equation
-            //     })
-        //     button.addEventListener('click',(e)=>{
-            //         let currentNumber = 1
-            //         currentNumber.toString().concat(button.value)
-//         display.innerText = equation +=currentNumber
-//     })
-// })
-// twoButton.addEventListener('click',(e)=>{
-//     equation += 2
-//     display.innerText = equation
-// })
-
-// addButton.addEventListener('click',addition)
-//     oneButton.addEventListener('click',(e)=>{
-//         display.innerText = 1
-//         equation += 1
-//     twoButton.addEventListener('click',(e)=>{
-//         display.innerText = 2
-//         equation +=2
-//     })
-// })
