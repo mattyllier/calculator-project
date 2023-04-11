@@ -217,87 +217,52 @@ subZeroButton.addEventListener('click',(e)=>{
 })
 
 
-const solveExp = ()=>{
-    let eqArr = equation.split(' ')
+const currentEq = (str)=>{
+    let eqArr = str.split(' ')
     eqArr.reverse()
-    for(let i = eqArr.length; i > 0; i--){
+    for(let i = eqArr.length; i >= 0; i--){
         if(eqArr[i]==='^'){
-            let solved = eqArr[i-1]**eqArr[i+1]
+            let solved = eqArr[i+1]**+eqArr[i-1]
+            eqArr.splice(i-1,3,solved.toString())
             display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            eqArr.reverse()
-            console.log(eqArr)
-        }
-    }
-    equation = eqArr.join('')
-    return equation
-}
-
-
-const solveMultDiv = ()=>{
-    let eqArr = equation.split(' ')
-    eqArr.reverse()
-    for(let i = eqArr.length-1; i >= 0; i--){
-        if(eqArr[i]==='*'){
-            let solved = eqArr[i-1]*eqArr[i+1]
-            display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            console.log(eqArr)
-        } else if(eqArr[i]==='/'){
-            let solved = eqArr[i-1]/eqArr[i+1]
-            display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            console.log(eqArr)
-        }
-    }
-    equation = eqArr.join('')
-    return equation
-}
-
-
-
-const solveAddSub = ()=>{
-    let eqArr = equation.split(' ')
-    eqArr.reverse()
-    for(let i = eqArr.length; i > 0; i--){
-        if(eqArr[i]==='+'){
-            let solved = parseFloat(eqArr[i-1])+parseFloat(eqArr[i+1])
-            display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            eqArr.reverse()
-            console.log(eqArr)
-        } else if(eqArr[i]==='-'){
-            let solved = eqArr[i-1]-eqArr[i+1]
-            display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            eqArr.reverse()
-            console.log(eqArr)
-        } else if(eqArr[i]==='%'){
-            let solved = eqArr[i-1]/100
-            display.innerText = solved
-            eqArr.splice([i-1],3,solved)
-            eqArr.reverse()
-            console.log(eqArr)
         } else if(eqArr[i]==='√'){
-            let solved = Math.sqrt(eqArr[i+1])
+            let solved = Math.sqrt(eqArr[i-1])
+            eqArr.splice(i-1,3,solved)
             display.innerText = solved
-            eqArr.splice([i],2,solved)
-            eqArr.reverse()
-            console.log(eqArr)
+        }
+    }
+    for(let i = eqArr.length; i >= 0; i--){
+        if(eqArr[i]==='*'){
+            let solved = +eqArr[i+1]*+eqArr[i-1]
+            eqArr.splice(i-1,3,solved.toString())
+            display.innerText = solved
+        } else if(eqArr[i]==='/'){
+            let solved = +eqArr[i+1]/eqArr[i-1]
+            eqArr.splice(i-1,3,solved.toString())
+            display.innerText = solved
+        } else if(eqArr[i]==='%'){
+            let solved = +eqArr[i+1]/100
+            eqArr.splice(i,2,solved)
+            display.innerText = solved
+        }
+    }
+    for(let i = eqArr.length; i >= 0; i--){
+        if(eqArr[i]==='+'){
+            let solved = +eqArr[i+1]+(+eqArr[i-1])
+            eqArr.splice(i-1,3,solved)
+            display.innerText = solved
+        } else if(eqArr[i]==='-'){
+            let solved = +eqArr[i+1]-(+eqArr[i-1])
+            eqArr.splice(i-1,3,solved)
+            display.innerText = solved
         }
     }
     equation = eqArr.join('')
     return equation
-}
-
-const currentEq = ()=>{
-    solveExp()
-    solveMultDiv()
-    solveAddSub()
 }
 
 equalButton.addEventListener('click',(e)=>{
-    currentEq()
+    currentEq(equation)
     display.innerText = equation
     operatorClicked = false
 })
