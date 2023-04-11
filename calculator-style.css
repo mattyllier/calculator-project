@@ -10,10 +10,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(sandro-katalina-k1bO_VTiZSs-unsplash.jpg);
 }
 
 #calculator {
-    height: 600px;
+    height: 700px;
     width: 500px;
     background-color: midnightblue;
     border-radius: 30px;
@@ -21,9 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-}
-#header{
-    height:k;
+    box-shadow: var(--box-shadow);
 }
 
 #display {
@@ -33,7 +32,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: lightcyan;
+    color: aquamarine;
+    text-shadow: 2px 0 10px fuchsia, 2px 2px azure;
     font-family: tahoma;
     font-size: 56px;
     border: solid 5px mediumslateblue;
@@ -93,10 +93,14 @@ button:focus{
     font-size: 400%;
     color: darkslategrey;
     text-shadow: 2px 0 10px maroon, 2px 2px black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 #clear:focus{
-    color: mediumslateblue;
+    color: darkslategray;
 }
 
 #bottom {
