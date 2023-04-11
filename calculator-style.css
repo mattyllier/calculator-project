@@ -1,5 +1,5 @@
 :root {
-    --boxShadow: ;
+    --box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 body {
@@ -13,8 +13,8 @@ body {
 }
 
 #calculator {
-    height: 80%;
-    width: 50%;
+    height: 600px;
+    width: 500px;
     background-color: midnightblue;
     border-radius: 30px;
     display: flex;
@@ -45,12 +45,20 @@ body {
     width: 100px;
     background-color: mediumslateblue;
     border-radius: 100%;
-    box-shadow: var(--boxShadow);
+    box-shadow: var(--box-shadow);
     cursor: pointer;
     font-family: system-ui, -apple-system;
     font-size: 400%;
     color: darkslategrey;
     text-shadow: 2px 0 10px maroon, 2px 2px black;
+}
+button:hover{
+    background-color:slateblue;
+}
+button:focus{
+    background-color:darkslateblue;
+    color: aquamarine;
+    text-shadow: 2px 0 10px fuchsia, 2px 2px azure;
 }
 #numbers {
     display: flex;
@@ -65,7 +73,7 @@ body {
     background-color: mediumslateblue;
     border-radius: 100%;
     border: solid 20px blueviolet;
-    box-shadow: var(--boxShadow);
+    box-shadow: var(--box-shadow);
     cursor: pointer;
     font-family: system-ui, -apple-system;
     font-size: 400%;
@@ -79,7 +87,7 @@ body {
     background-color: lightslategray;
     border-radius: 50px;
     border: solid 20px darkslategrey;
-    box-shadow: var(--boxShadow);
+    box-shadow: var(--box-shadow);
     cursor: pointer;
     font-family: system-ui, -apple-system;
     font-size: 400%;
@@ -87,7 +95,9 @@ body {
     text-shadow: 2px 0 10px maroon, 2px 2px black;
 }
 
-
+#clear:focus{
+    color: mediumslateblue;
+}
 
 #bottom {
     display: flex;
