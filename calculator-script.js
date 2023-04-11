@@ -1,5 +1,5 @@
 
-//declared variables of selected elements from HTML document
+//declared variables of selected elements from HTML document to create interactive buttons
 const calculator = document.getElementById('calculator')
 const display = document.getElementById('display')
 const addButton = document.getElementById('add')
@@ -17,6 +17,7 @@ const sixButton = document.getElementById('6')
 const sevenButton = document.getElementById('7')
 const eightButton = document.getElementById('8')
 const nineButton = document.getElementById('9')
+
 const decimalButton = document.getElementById('dec')
 const percentButton = document.getElementById('%')
 const sqrtButton = document.getElementById('sqrt')
@@ -25,50 +26,15 @@ const subZeroButton = document.getElementById('subZero')
 
 const equalButton = document.getElementById('=')
 const clearButton = document.getElementById('clear')
-
-//set value attributes to each variable
-// addButton.value = '+'
-// subButton.value = '-'
-// multButton.value = '*'
-// divButton.value = '/'
-    
-// zeroButton.value = '0'
-// oneButton.value = 1
-// twoButton.value = 2
-// threeButton.value = '3'
-// fourButton.value = '4'
-// fiveButton.value = '5'
-// sixButton.value = '6'
-// sevenButton.value = '7'
-// eightButton.value = '8'
-// nineButton.value = '9'
-    
-// equalButton.value = '='
-// clearButton.value = ''
-
-//set equation to an empty string at default
-// let equation = ''
-// display.innerText = equation
+const operatorButton = document.getElementsByClassName('operatorButton')
+const button = document.getElementsByClassName('button')
+const intButton = document.getElementById('int')
 
 
-//added event listeners for number buttons, to add their values when clicked to the equation and display
-// const button = getElementByClass('button')
-// button.addEventListener('click',(e)=>{
-    //     display.innerText = e.target.value
-    // })
-    
-    
-//set default variables
-       //let currentVal = '0'
-// let valA = 0
-// let currentOperator = ''
-// let valB = 0
-       //let currentEquation = [valA,currentOperator,valB]
+//set defaults
 display.innerText = ''
 let operatorClicked = false
 let equation = ''
-const operatorButton = document.getElementsByClassName('operatorButton')
-const button = document.getElementsByClassName('button')
 
 
 //added event listener for clear button associated functions
@@ -78,15 +44,7 @@ display.innerText = equation
 operatorClicked = false
 })
 
-// button.addEventListener('click',(e)=>{
-//     equation += e.target.value
-//     display.innerText = e.target.value
-// })
-// operator.addEventListener('click',(e)=>{
-//     equation += e.target.value
-//     display.innerText = e.target.value
-// })
-
+//added spaces before and after operators in event listener to split on spaces, keeping in tact numbers with more than one digit
 addButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
         equation += ` ${addButton.value} `
@@ -116,7 +74,6 @@ divButton.addEventListener('click',(e)=>{
         equation += ` ${divButton.value} `
         display.innerText += divButton.value
         operatorClicked = true
-        console.log(equation)
     }
 })
 
@@ -126,97 +83,86 @@ zeroButton.addEventListener('click',(e)=>{
     equation += zeroButton.value
     display.innerText += zeroButton.value
     operatorClicked = false
-    console.log(equation)
 })
 oneButton.addEventListener('click',(e)=>{
-    // operatorClicked === false ? valA += oneButton.value : valB += oneButton.value
     equation += oneButton.value
     display.innerText += oneButton.value
     operatorClicked = false
-    console.log(equation)
 })
 twoButton.addEventListener('click',(e)=>{
     equation += twoButton.value
     display.innerText += twoButton.value
     operatorClicked = false
-    console.log(equation)
 })
 threeButton.addEventListener('click',(e)=>{
     equation += threeButton.value
     display.innerText += threeButton.value
     operatorClicked = false
-    console.log(equation)
 })
 fourButton.addEventListener('click',(e)=>{
     equation += fourButton.value
     display.innerText += fourButton.value
     operatorClicked = false
-    console.log(equation)
 })
 fiveButton.addEventListener('click',(e)=>{
     equation += fiveButton.value
     display.innerText += fiveButton.value
     operatorClicked = false
-    console.log(equation)
 })
 sixButton.addEventListener('click',(e)=>{
     equation += sixButton.value
     display.innerText += sixButton.value
     operatorClicked = false
-    console.log(equation)
 })
 sevenButton.addEventListener('click',(e)=>{
     equation += sevenButton.value
     display.innerText += sevenButton.value
     operatorClicked = false
-    console.log(equation)
 })
 eightButton.addEventListener('click',(e)=>{
     equation += eightButton.value
     display.innerText += eightButton.value
     operatorClicked = false
-    console.log(equation)
 })
 nineButton.addEventListener('click',(e)=>{
     equation += nineButton.value
     display.innerText += nineButton.value
     operatorClicked = false
-    console.log(equation)
 })
+
+//event listeners for other features
 decimalButton.addEventListener('click',(e)=>{
     equation += decimalButton.value
     display.innerText += decimalButton.value
     operatorClicked = false
-    console.log(equation)
 })
 percentButton.addEventListener('click',(e)=>{
-    //to decimal function
     equation += ` ${percentButton.value} `
     display.innerText += percentButton.value
     operatorClicked = false
-    console.log(equation)
 })
 sqrtButton.addEventListener('click',(e)=>{
     equation += ` ${sqrtButton.value} `
     display.innerText += sqrtButton.value
     operatorClicked = false
-    console.log(equation)
 })
 expButton.addEventListener('click',(e)=>{
-    //to exp function
     equation += ` ${expButton.value} `
     display.innerText += expButton.value
     operatorClicked = false
-    console.log(equation)
 })
 subZeroButton.addEventListener('click',(e)=>{
      operatorClicked = false
      equation += subZeroButton.value
      display.innerText += subZeroButton.value
-     console.log(equation)
+})
+intButton.addEventListener('click',(e)=>{
+    operatorClicked = false
+    Math.round(equation)
+    display.innerText = Math.round(equation)
 })
 
-
+//logic for equation, comprised of a function with three separate loops in order to detect order of operations 
 const currentEq = (str)=>{
     let eqArr = str.split(' ')
     eqArr.reverse()
@@ -261,6 +207,8 @@ const currentEq = (str)=>{
     return equation
 }
 
+
+//equal button event listener invokes the solve logic and returns the equation so it can be used for more than one operation
 equalButton.addEventListener('click',(e)=>{
     currentEq(equation)
     display.innerText = equation
