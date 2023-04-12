@@ -1,7 +1,8 @@
+/*root variable for box shadow, sourced from https://getcssscan.com/css-box-shadow-examples*/
 :root {
     --box-shadow: black 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
-
+/*body element sets background and flex of calculator itself on page */
 body {
     height: 100vh;
     width: 100vw;
@@ -13,6 +14,7 @@ body {
     background-image: url(image.png);
 }
 
+/*the calculator container, organized using flex column and containing sections for display, operators, numbers, and bottom*/
 #calculator {
     height: 700px;
     width: 500px;
@@ -29,6 +31,8 @@ body {
     padding-right: 50px;
 }
 
+/*the display is designed with auto height and width, with a solid border, so that the display appears to stretch dynamically*/
+/*two text shadows are used to give the shadow a gradient effect*/
 #display {
     height: auto;
     width: auto;
@@ -44,6 +48,7 @@ body {
     border-radius: 100%;
 }
 
+/*the button class is used for the number buttons and additional functions, flex used to center the text within*/
 .button {
     height: 100px;
     width: 100px;
@@ -61,6 +66,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+/*hover and focus effect for buttons changes color and shadow*/
 button:hover{
     background-color:slateblue;
     color: slateblue;
@@ -70,6 +76,8 @@ button:focus{
     color: mediumslateblue;
     text-shadow: 2px 0 10px fuchsia, 2px 2px azure;
 }
+
+/*containers for each group of buttons, flex used for each to center contents*/
 #numbers {
     display: flex;
     flex-flow: row wrap;
@@ -83,6 +91,14 @@ button:focus{
     justify-content: center;
 }
 
+#bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+/*operator buttons use different colors, also utilizing box-shadow and text-shadow*/
 .operator {
     height: 100px;
     width: 100px;
@@ -100,6 +116,7 @@ button:focus{
     align-items: center;
 }
 
+/*buttons on bottom sized differently*/
 .bottom {
     height: 100px;
     width: 160px;
@@ -118,14 +135,8 @@ button:focus{
     justify-content: center;
 }
 
+/*clear button changes color upon click*/
 #clear:focus{
     color: darkslategray;
     background-color: navy;
-}
-
-#bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
 }

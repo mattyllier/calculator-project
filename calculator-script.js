@@ -31,42 +31,44 @@ const button = document.getElementsByClassName('button')
 const intButton = document.getElementById('int')
 
 
-//set defaults
+//set defaults, operatorClicked is the logic which doesn't permit an operator button to be clicked more than once in a row
 display.innerText = ''
 let operatorClicked = false
+//the equation variable is the string which clicked buttons' values are added to
+//upon clicking '=', the string is input as the parameter in the solve function 'currentEq'
 let equation = ''
 
 
-//added event listener for clear button associated functions
+//added event listener for clear button which resets the equation to default
+//the visible text of the display element is consistently updated in sync with the value of the equation
 clearButton.addEventListener('click',(e)=>{
 equation = ''
 display.innerText = equation
 operatorClicked = false
 })
 
+//added event listeners for buttons, when clicked, the button's value is added to the equation as well as the display
 //added spaces before and after operators in event listener to split on spaces, keeping in tact numbers with more than one digit
+//for operator buttons, the operatorClicked logic is used to ensure that two operators won't appear next to each other in the equation
 addButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
-        equation += ` ${addButton.value} `
+        equation += ` ${addButton.value} ` 
         display.innerText += addButton.value
         operatorClicked = true
-        console.log(equation)
     }
 })
 subButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
         equation += ` ${subButton.value} `
         display.innerText += subButton.value
-    operatorClicked = true
-    console.log(equation)
-}
+        operatorClicked = true
+    }
 })
 multButton.addEventListener('click',(e)=>{
     if(operatorClicked === false){
         equation += ` ${multButton.value} `
         display.innerText += multButton.value
         operatorClicked = true
-        console.log(equation)
     }
 })
 divButton.addEventListener('click',(e)=>{
@@ -78,7 +80,7 @@ divButton.addEventListener('click',(e)=>{
 })
 
 
-//add event listeners for number buttons
+//added event listeners for number buttons
 zeroButton.addEventListener('click',(e)=>{
     equation += zeroButton.value
     display.innerText += zeroButton.value
@@ -130,7 +132,7 @@ nineButton.addEventListener('click',(e)=>{
     operatorClicked = false
 })
 
-//event listeners for other features
+//these are event listeners for additional features, such as decimal, percent, exponent, square root, and round to int
 decimalButton.addEventListener('click',(e)=>{
     equation += decimalButton.value
     display.innerText += decimalButton.value
@@ -162,7 +164,12 @@ intButton.addEventListener('click',(e)=>{
     display.innerText = Math.round(equation)
 })
 
-//logic for equation, comprised of a function with three separate loops in order to detect order of operations 
+
+//logic for equation, comprised of a function with three separate loops in order to detect order of operations
+//when the equals button is clicked, the currentEq function is invoked with the equation string as the parameter
+//eqArr is the array version of the equation, split on the spaces which were added before and after each operator
+//the array is reversed and looped through backwards, this is because the index will be changed as a result of the splice method
+//the first loop checks for the exponent and square root operators, using the index before and/or after as their operands
 const currentEq = (str)=>{
     let eqArr = str.split(' ')
     eqArr.reverse()
@@ -177,6 +184,12 @@ const currentEq = (str)=>{
             display.innerText = solved
         }
     }
+
+    //utilizing order of operations, the second loop in the currentEq function looks for multiplication and division
+    //solved is the variable containing the solution of the current matched index and its operands
+    //the indexes of the operands (specifically in the case of division and subtraction) appear reversed, as the loop and array are
+    //the + in front of the operand indexes is converting them to numbers, and the actual operator is used which is not a data type
+    //the solved variable is then spliced back into the array replacing the two or three indexes used
     for(let i = eqArr.length; i >= 0; i--){
         if(eqArr[i]==='*'){
             let solved = +eqArr[i+1]*+eqArr[i-1]
@@ -192,6 +205,7 @@ const currentEq = (str)=>{
             display.innerText = solved
         }
     }
+    //the third loop checks for addition and subtraction operators
     for(let i = eqArr.length; i >= 0; i--){
         if(eqArr[i]==='+'){
             let solved = +eqArr[i+1]+(+eqArr[i-1])
@@ -203,15 +217,15 @@ const currentEq = (str)=>{
             display.innerText = solved
         }
     }
+    //the eqArr carrying the solution is joined and assigned as the value of the equation, in order that it can be operated on
     equation = eqArr.join('')
     return equation
 }
 
 
-//equal button event listener invokes the solve logic and returns the equation so it can be used for more than one operation
+//equal button event listener invokes the solve logic and returns the equation 
 equalButton.addEventListener('click',(e)=>{
     currentEq(equation)
     display.innerText = equation
     operatorClicked = false
 })
-
